@@ -37,8 +37,8 @@ public class Tile
 
     isMatched = false;
     isShowing = false;
-    hidden =  "_____"; //  face down value
-    matched = "  *  ";   // a tile that is no longer in play
+    hidden =  "___________"; //  face down value
+    matched = "     *     ";   // a tile that is no longer in play
   }
 
   /**

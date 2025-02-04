@@ -17,7 +17,7 @@ import java.util.Scanner;
 public class Game
 {
   private Scanner in = new Scanner(System.in);
-
+  
   private Board board;
   private int row1, col1;
   private int row2, col2;
@@ -34,8 +34,10 @@ public class Game
 
     board = new Board();
     // play until all tiles are matched
+    long startTime = System.currentTimeMillis();
     while (!board.allTilesMatch())
     {
+      long currentTime = System.currentTimeMillis();
       // get player's first selection, if not an integer, quit
       row1 = -1;
       col1 = -1;
@@ -43,6 +45,7 @@ public class Game
       while (!validTile)
       {
         displayBoard();
+        System.out.println((currentTime - startTime)/1000 + " seconds");
         System.out.print("First choice (row col): ");
         validTile = getTile(true); 
       }
@@ -63,7 +66,7 @@ public class Game
         // check if user chosen same tile twice
         if ((row1 == row2) && (col1 == col2))
         {
-          System.out.println("You mush choose a different second tile");
+          System.out.println("You must choose a different second tile");
           wait(2);
           validTile = false;
         }
@@ -78,11 +81,13 @@ public class Game
       System.out.println(matched);
 
       // wait 2 seconds to start the next turn
-      wait(2); 
+      wait(1);
     }
 
     displayBoard();
     System.out.println("Game Over!");
+    long endTime = System.currentTimeMillis();
+    System.out.println("That took " + (endTime - startTime)/1000 + " seconds");
   }
 
   /**
@@ -136,7 +141,7 @@ public class Game
   {
 
     // scroll current board off screen
-    for (int x = 0; x < 50; x++) {
+    for (int x = 0; x < 60; x++) {
       System.out.println();
     }
 

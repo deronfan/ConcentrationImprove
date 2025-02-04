@@ -1,3 +1,12 @@
+import java.io.File; 
+import java.io.IOException; 
+import java.util.Scanner; 
+  
+import javax.sound.sampled.AudioInputStream; 
+import javax.sound.sampled.AudioSystem; 
+import javax.sound.sampled.Clip; 
+import javax.sound.sampled.LineUnavailableException; 
+import javax.sound.sampled.UnsupportedAudioFileException; 
 /** 
  * A game board of NxM board of tiles.
  * 
@@ -10,13 +19,19 @@
  */
 public class Board
 {  
-  private static String[] tileValues = {"lion", "lion",
-                                        "penguin", "penguin",
-                                        "dolphin", "dolphin",
-                                        "fox", "fox",
-                                        "monkey", "monkey",
-                                        "turtle", "turtle"}; 
-  private Tile[][] gameboard = new Tile[3][4];
+  private String[] tileValues = {" Ambusher  ", " Ambusher  ",
+                                 "Artillerist", "Artillerist",
+                                 "  Bruiser  ", "  Bruiser  ",
+                                 " Dominator ", " Dominator ",
+                                 "Quickstrike", "Quickstrike",
+                                 " Sentinel  ", " Sentinel  ",
+                                 "  Sniper   ", "  Sniper   ",
+                                 "BloodHunter", "BloodHunter",
+                                 "  Sorcerer ", "  Sorcerer ",
+                                 " Visionary ", " Visionary ",
+                                 "  Watcher  ", "  Watcher  ",
+                                 "Mech Herald", "Mech Herald"}; 
+  private Tile[][] gameboard = new Tile[6][4];
 
   /**  
    * Constructor for the game. Creates the 2D gameboard
@@ -25,11 +40,22 @@ public class Board
    */
   public Board()
   {
-   
-    /* your code here */ 
-
+    for(int c = 0; c < 6; c++){
+      for(int r = 0; r < 4; r++){
+        boolean finish = false;
+        while(!finish){
+          int insert = (int)(Math.random()*tileValues.length);
+          if(tileValues[insert] != null){
+            gameboard[c][r] = new Tile(tileValues[insert]);
+            // System.out.print(tileValues[insert]);
+            tileValues[insert] = null;
+            finish = true;
+        }
+      }
+    }
+      // System.out.println();
   }
-
+}
  /** 
    * Returns a string representation of the board, getting the state of
    * each tile. If the tile is showing, displays its value, 
@@ -41,10 +67,17 @@ public class Board
    */
   public String toString()
   {
- 
-    /* your code here */
- 
-    return "";
+    String out = "";
+    for(int c = 0; c < 6; c++){
+      out += "" + c;
+      for(int r = 0; r < 4; r++){
+        if(gameboard[c][r].isShowingValue()) out += " : " + gameboard[c][r].toString();
+        else out += " : " + gameboard[c][r].getHidden();
+      }
+      out += "\n";
+    }
+    System.out.println(out);
+    return out;
   }
 
   /** 
@@ -57,10 +90,13 @@ public class Board
    */
   public boolean allTilesMatch()
   {
-
-    /* your code  here */
-    
-    return true;
+    boolean check = true;
+for(int c = 0; c < 6; c++){
+      for(int r = 0; r < 4; r++){
+    if(!gameboard[c][r].matched()) check = false;
+  }
+    }
+    return check;
   }
 
   /** 
@@ -76,7 +112,7 @@ public class Board
    */
   public void showValue (int row, int column)
   {
-   
+    gameboard[row][column].show();
     /* your code here */
   }  
 
@@ -100,9 +136,21 @@ public class Board
   public String checkForMatch(int row1, int col1, int row2, int col2)
   {
     String msg = "";
-
-     /* your code here */
-    
+    if(row1 == row2 && col1 == col2){
+      msg = "You cannot choose the same thing twice!";
+      gameboard[row1][col1].hide();
+      gameboard[row2][col2].hide();
+    }
+    else if(gameboard[row1][col1].getValue().equals(gameboard[row2][col2].getValue())){
+      msg = "You found a match!";
+      gameboard[row1][col1].foundMatch();
+      gameboard[row2][col2].foundMatch();
+    }
+    else{
+      msg = "Incorrect";
+      gameboard[row1][col1].hide();
+      gameboard[row2][col2].hide();
+    }
      return msg;
   }
 
@@ -116,10 +164,12 @@ public class Board
    */
   public boolean validateSelection(int row, int col)
   {
-
-    /* your code here */
-
-    return true;
+    if (row < 6 && col < 4 && row > -1 && col > -1) {
+      return true; 
+    }
+    else{
+      return false;
+    }
   }
 
 }
