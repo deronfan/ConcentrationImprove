@@ -10,7 +10,9 @@
  * @version 2.0
 */
 import java.util.Scanner;
-
+import java.io.File;
+import java.io.IOException;
+import javax.sound.sampled.*;
 /**
  * A game class to play concentration
  */
@@ -22,8 +24,12 @@ public class Game
   private int row1, col1;
   private int row2, col2;
 
-  public void play()
+  public void play() throws UnsupportedAudioFileException, IOException, LineUnavailableException
   {
+    // AudioInputStream flipsound = AudioSystem.getAudioInputStream(new File("Flip.wav"));
+    // var fclip = AudioSystem.getClip();
+    // fclip.open(flipsound);
+    // fclip.start();
     // instructions
     System.out.println("Welcome!");
     System.out.println("Select the tile locations you want to match,");
@@ -87,6 +93,12 @@ public class Game
     displayBoard();
     System.out.println("Game Over!");
     long endTime = System.currentTimeMillis();
+    if((endTime - startTime)/1000<=240){
+      System.out.println("Achievement Got: Speedrunner (Beat the game in under 4 minutes)");
+    }
+    if((endTime - startTime)/1000<=120){
+      System.out.println("Achievement Got: Two Fast (Beat the game in under 2 minutes)");
+    }
     System.out.println("That took " + (endTime - startTime)/1000 + " seconds");
   }
 

@@ -18,9 +18,11 @@
  */
 public class Tile
 {   
+  private static String RESET = "\u001B[0m"; 
+  private static String RED = "\u001B[31m"; 
+  private static String GREEN = "\u001B[32m"; 
   private boolean isMatched;
   private boolean isShowing;
-  
   private String value;
   private String hidden;
   private String matched;
@@ -37,8 +39,8 @@ public class Tile
 
     isMatched = false;
     isShowing = false;
-    hidden =  "___________"; //  face down value
-    matched = "     *     ";   // a tile that is no longer in play
+    hidden =  RED + "___________" + RESET; //  face down value
+    matched = GREEN + " [MATCHED] " + RESET;   // a tile that is no longer in play
   }
 
   /**

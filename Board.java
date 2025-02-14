@@ -1,12 +1,3 @@
-import java.io.File; 
-import java.io.IOException; 
-import java.util.Scanner; 
-  
-import javax.sound.sampled.AudioInputStream; 
-import javax.sound.sampled.AudioSystem; 
-import javax.sound.sampled.Clip; 
-import javax.sound.sampled.LineUnavailableException; 
-import javax.sound.sampled.UnsupportedAudioFileException; 
 /** 
  * A game board of NxM board of tiles.
  * 
@@ -19,18 +10,20 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  */
 public class Board
 {  
-  private String[] tileValues = {" Ambusher  ", " Ambusher  ",
-                                 "Artillerist", "Artillerist",
-                                 "  Bruiser  ", "  Bruiser  ",
-                                 " Dominator ", " Dominator ",
-                                 "Quickstrike", "Quickstrike",
-                                 " Sentinel  ", " Sentinel  ",
-                                 "  Sniper   ", "  Sniper   ",
-                                 "BloodHunter", "BloodHunter",
-                                 "  Sorcerer ", "  Sorcerer ",
-                                 " Visionary ", " Visionary ",
-                                 "  Watcher  ", "  Watcher  ",
-                                 "Mech Herald", "Mech Herald"}; 
+  private static String YELLOW = "\u001B[33m";
+  private static String RESET = "\u001B[0m"; 
+  private String[] tileValues = {YELLOW + " Ambusher  " + RESET, YELLOW + " Ambusher  " + RESET,
+                                 YELLOW + "Artillerist" + RESET, YELLOW + "Artillerist" + RESET,
+                                 YELLOW + "  Bruiser  " + RESET, YELLOW + "  Bruiser  " + RESET,
+                                 YELLOW + " Dominator " + RESET, YELLOW + " Dominator " + RESET,
+                                 YELLOW + "Quickstrike" + RESET, YELLOW + "Quickstrike" + RESET,
+                                 YELLOW + " Sentinel  " + RESET, YELLOW + " Sentinel  " + RESET,
+                                 YELLOW + "  Sniper   " + RESET, YELLOW + "  Sniper   " + RESET,
+                                 YELLOW + "BloodHunter" + RESET, YELLOW + "BloodHunter" + RESET,
+                                 YELLOW + "  Sorcerer " + RESET, YELLOW + "  Sorcerer " + RESET,
+                                 YELLOW + " Visionary " + RESET, YELLOW + " Visionary " + RESET,
+                                 YELLOW + "  Watcher  " + RESET, YELLOW + "  Watcher  " + RESET,
+                                 YELLOW + "Mech Herald" + RESET, YELLOW + "Mech Herald" + RESET}; 
   private Tile[][] gameboard = new Tile[6][4];
 
   /**  
@@ -71,12 +64,11 @@ public class Board
     for(int c = 0; c < 6; c++){
       out += "" + c;
       for(int r = 0; r < 4; r++){
-        if(gameboard[c][r].isShowingValue()) out += " : " + gameboard[c][r].toString();
-        else out += " : " + gameboard[c][r].getHidden();
+        if(gameboard[c][r].isShowingValue()) out += " | " + gameboard[c][r].toString();
+        else out += " | " + gameboard[c][r].getHidden();
       }
       out += "\n";
     }
-    System.out.println(out);
     return out;
   }
 

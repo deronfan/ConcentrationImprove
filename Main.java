@@ -1,3 +1,8 @@
+
+import java.util.Scanner;
+import java.io.File;
+import java.io.IOException;
+import javax.sound.sampled.*;
 class Main {
     /*  
         * Play the game of Concentration
@@ -6,7 +11,7 @@ class Main {
         * checks if the cards at the 2 tile locations match, and then re-displays the board. 
         */
     
-        public static void main(String[] args)
+        public static void main(String[] args)throws UnsupportedAudioFileException, IOException, LineUnavailableException
         {
         Game game = new Game();
         game.play();
