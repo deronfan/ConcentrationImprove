@@ -106,7 +106,42 @@ for(int c = 0; c < 6; c++){
   {
     gameboard[row][column].show();
     /* your code here */
+  }
+  public void showRow (int row)
+  {
+    gameboard[row][0].show();
+    gameboard[row][1].show();
+    gameboard[row][2].show();
+    gameboard[row][3].show();
+    /* your code here */
   }  
+  public void hideRow (int row)
+  {
+    gameboard[row][0].hide();
+    gameboard[row][1].hide();
+    gameboard[row][2].hide();
+    gameboard[row][3].hide();
+    /* your code here */
+  }
+  public void showCol (int col)
+  {
+    gameboard[0][col].show();
+    gameboard[1][col].show();
+    gameboard[2][col].show();
+    gameboard[3][col].show();
+    gameboard[4][col].show();
+    gameboard[5][col].show();
+  }  
+  public void hideCol (int col)
+  {
+    gameboard[0][col].hide();
+    gameboard[1][col].hide();
+    gameboard[2][col].hide();
+    gameboard[3][col].hide();
+    gameboard[4][col].hide();
+    gameboard[5][col].hide();
+  }  
+  
 
   /** 
    * Checks if the Tiles in the two locations match.
